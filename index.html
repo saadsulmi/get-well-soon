@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1030">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>A Little World Made Just For You ❤️</title>
     <meta name="description" content="Get well soon, my love.">
     <meta property="og:title" content="A Little World Made Just For You ❤️">
@@ -35,6 +38,9 @@
         }
 
         html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
             height: auto;
             scroll-behavior: smooth;
             scroll-padding-top: env(safe-area-inset-top, 0px)
@@ -80,11 +86,12 @@
         section {
             min-height: 100vh;
             min-height: 100svh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 96px 24px;
+            padding: 96px max(22px, env(safe-area-inset-right)) 96px max(22px, env(safe-area-inset-left));
             text-align: center;
             position: relative
         }
@@ -149,6 +156,7 @@
             font: 400 1rem var(--sans);
             letter-spacing: .06em;
             cursor: pointer;
+            -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             box-shadow: 0 0 30px rgba(232, 201, 135, .25);
             transition: .4s;
@@ -182,6 +190,7 @@
         .glass {
             background: rgba(255, 255, 255, .06);
             border: 1px solid rgba(255, 255, 255, .14);
+            -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
             border-radius: 22px;
             padding: 26px;
@@ -443,26 +452,32 @@
 
         /* universe */
         #uni {
-            width: min(620px, 94vw);
+            width: min(620px, 100%);
             aspect-ratio: 1;
             touch-action: manipulation
         }
 
         #uni .m {
-            cursor: pointer
+            cursor: pointer;
+            outline: none
         }
 
-        #uni .m circle:first-child {
-            fill: rgba(232, 201, 135, .2)
+        #uni .hit {
+            fill: transparent
         }
 
-        #uni .m circle:last-child {
+        #uni .gl {
+            fill: rgba(232, 201, 135, .22);
+            transition: fill .3s
+        }
+
+        #uni .core {
             fill: #fff6d6
         }
 
-        #uni .m:hover circle:first-child,
-        #uni .m:focus circle:first-child {
-            fill: rgba(232, 201, 135, .55)
+        #uni .m:hover .gl,
+        #uni .m:focus-visible .gl {
+            fill: rgba(232, 201, 135, .6)
         }
 
         .memo {
@@ -551,6 +566,7 @@
             display: none;
             place-items: center;
             background: rgba(5, 8, 30, .7);
+            -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
             padding: 24px
         }
@@ -672,6 +688,7 @@
         }
 
         #letter {
+            scroll-margin-top: 20px;
             max-width: 580px;
             width: 100%;
             margin-top: 1rem;
@@ -699,7 +716,7 @@
         }
 
         #letter p {
-            font: 400 clamp(1.5rem, 3.4vw, 1.9rem)/1.45 var(--hand);
+            font: 400 clamp(1.6rem, 3.4vw, 1.9rem)/1.45 var(--hand);
             margin: .45em 0;
             opacity: 0;
             animation: fi 1.2s forwards
@@ -781,6 +798,7 @@
             font: 400 .85rem var(--sans);
             background: rgba(10, 16, 48, .65);
             border: 1px solid rgba(255, 255, 255, .2);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             min-height: 44px
         }
@@ -878,6 +896,168 @@
                 scroll-behavior: auto
             }
         }
+
+        button,
+        .m,
+        .pol {
+            touch-action: manipulation
+        }
+
+        #final .t:not(.on) {
+            pointer-events: none
+        }
+
+        @media(max-width:700px) {
+            section {
+                padding-top: 80px;
+                padding-bottom: 80px
+            }
+
+            .glass {
+                padding: 20px;
+                border-radius: 18px
+            }
+
+            .items {
+                width: 100%
+            }
+
+            .item {
+                width: calc(50% - 8px);
+                max-width: 170px
+            }
+
+            .tl {
+                padding-left: 28px
+            }
+
+            .tl .glass::before {
+                left: -25px
+            }
+
+            .gal {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding: 24px 22px 34px;
+                margin: 0 -22px;
+                width: calc(100% + 44px);
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none
+            }
+
+            .gal::-webkit-scrollbar {
+                display: none
+            }
+
+            .pol {
+                flex: 0 0 78%;
+                scroll-snap-align: center
+            }
+
+            #letter {
+                padding: 30px 22px
+            }
+
+            #music {
+                padding: 8px 12px;
+                font-size: .78rem;
+                right: 12px
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 340px
+            }
+
+            h2 {
+                font-size: clamp(1.7rem, 8vw, 2.4rem)
+            }
+
+            .castle {
+                bottom: 10%
+            }
+        }
+
+        @media(max-width:380px) {
+            #music span:last-child {
+                display: none
+            }
+        }
+
+        @media(max-height:520px) and (orientation:landscape) {
+            section {
+                padding-top: 60px;
+                padding-bottom: 60px
+            }
+
+            .moon {
+                display: none
+            }
+        }
+
+        /* extra mobile polish */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden
+        }
+
+        img,
+        svg,
+        canvas {
+            max-width: 100%
+        }
+
+        @media(max-width:700px) {
+            .kicker {
+                letter-spacing: .22em;
+                font-size: .68rem
+            }
+
+            h1,
+            .sub {
+                max-width: 100%
+            }
+
+            #uni {
+                width: 100%
+            }
+
+            .memo {
+                max-width: 100%;
+                width: 100%
+            }
+
+            #letter p {
+                font-size: 1.5rem
+            }
+
+            #final .big {
+                font-size: clamp(2.4rem, 12vw, 4rem)
+            }
+
+            #lb .pol {
+                max-width: 92vw
+            }
+
+            .tl {
+                padding-left: 26px
+            }
+
+            section {
+                padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px))
+            }
+        }
+
+        @media(hover:none) {
+
+            .item:hover,
+            .pol:hover {
+                transform: none
+            }
+        }
     </style>
 </head>
 
@@ -907,16 +1087,17 @@
             },
             wishes: [["Sit beside you", "No talking required. I'd just be there."], ["Make you something warm", "Because sometimes comfort comes in a cup."], ["Fix your pillow", "And probably annoy you while doing it."], ["Give you a ridiculously long hug", "The kind you can't escape from."], ["Tell you everything will be okay", "And stay until you believe me."]],
             memories: [ // photo: "" or an image URL / data URI
-                { title: "The day we met.", text: "Replace with your memory ✦ date, place, how it felt.", date: "Add date", photo: "" },
-                { title: "Our first date.", text: "Replace with your memory.", date: "Add date", photo: "" },
-                { title: "The day we became engaged.", text: "Replace with your memory.", date: "Add date", photo: "" },
-                { title: "Our Nikkah.", text: "Replace with your memory.", date: "Add date", photo: "" },
-                { title: "The beginning of forever.", text: "Replace with your memory.", date: "Add date", photo: "" }],
-            gallery: [{ label: "OUR FIRST MEMORY", caption: "Where it all began", photo: "" }, { label: "OUR FAVORITE DAY", caption: "Add a caption", photo: "" }, { label: "OUR LITTLE MOMENTS", caption: "Add a caption", photo: "" }, { label: "FOREVER & ALWAYS", caption: "Add a caption", photo: "" }],
+                { title: "First text that change my life.", text: "How you replied me back for that salam, still mystery. That was where it all began.", date: "15 Dec 2025", photo: "" },
+                { title: "The day we met.", text: "I was shy and tense, and then I saw you, and my whole life brightened up.", date: "19 Dec 2025", photo: "" },
+                { title: "Our first date.", text: "I forgot to bring flowers on our first meet, so the next date I brought a bouquet for my jaan.", date: "20 Dec 2025", photo: "" },
+                { title: "The beginning of forever.", text: "Our 3rd date. You told me you love me with the words: \"you are the noor of my eyes, sulthan of your heart.\"", date: "14 Jan 2026", photo: "" },
+                { title: "The day we became engaged.", text: "Beautiful lilies for my beautiful partner, and a ring that seals us forever and ever.", date: "18 Jan 2026", photo: "" },
+                { title: "Our Nikkah.", text: "The best day of my life. I will never forget that smile on your face when I lifted the veil from your head.", date: "14 Feb 2026", photo: "" }],
+            gallery: [{ label: "OUR FIRST MEMORY", caption: "Where it all began", photo: "1.jpg" }, { label: "OUR FAVORITE DAY", caption: "Flowers for my princess", photo: "2.jpg" }, { label: "OUR LITTLE MOMENTS", caption: "The wind and sea", photo: "3.jpg" }, { label: "FOREVER & ALWAYS", caption: "Lillies waiting for you", photo: "4.jpg" }],
             tired: [["When you're tired…", "Rest."], ["When you're scared…", "Hold my hand."], ["When you're overwhelmed…", "Take one tiny step."]],
             tiredEnd: ["And when you feel like you can't do it anymore…", "Remember that you don't have to do it alone.", "I'm right here. ❤️"],
             heart: { prompt: "Tap my heart.", burst: "I LOVE YOU", after: "More than yesterday. Less than tomorrow." },
-            letter: ["My love,", "I wish I could take every bit of pain, tiredness and heaviness away from you.", "Since I can't, I'll do the next best thing — I'll stay.", "On your good days.", "On your difficult days.", "On the days when you feel like yourself, and especially on the days when you don't.", "You never have to earn my love by being okay.", "You already have it. Completely.", "So rest, breathe, heal and take your time.", "I'll be right here cheering for you, annoying you, making you smile, and loving you through all of it.", "Get well soon, my beautiful girl.", "Your person, always. ❤️"],
+            letter: ["My love,", "I wish I could take every bit of pain, tiredness and heaviness away from you.", "Since I can't, I'll do the next best thing — I'll stay.", "On your good days.", "On your difficult days.", "On the days when you feel like yourself, and especially on the days when you don't.", "You never have to earn my love by being okay.", "You already have it. Completely.", "So rest, breathe, heal and take your time.", "I'll be right here cheering for you, annoying you, making you smile, and loving you through all of it.", "Get well soon, my beautiful girl.", "Your Sulu, always. ❤️"],
             final: ["Until you're feeling like yourself again…", "I'll be right here."],
             finalName: "I LOVE YOU, JASNA ❤️", finalSub: "Get well soon, my love."
         };
@@ -936,10 +1117,10 @@
         function memStars() { // heart constellation
             const pts = []; const N = 12; for (let i = 0; i < N; i++) { const t = i / N * Math.PI * 2; pts.push([300 + 15.5 * Math.pow(Math.sin(t), 3) * 1.0 * 1.0 * 1, 290 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 15.5]) }
             pts.forEach(p => p[0] = 300 + (p[0] - 300) * 1.0);
-            const idx = [0, 2, 5, 8, 10].slice(0, C.memories.length);
+            const idx = [0, 2, 4, 6, 8, 10].slice(0, C.memories.length);
             const line = pts.map(p => p.join(',')).join(' ') + ' ' + pts[0].join(',');
             const dim = pts.map((p, i) => idx.includes(i) ? '' : `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#fff6d6" opacity=".7"/>`).join('');
-            const mem = idx.map((pi, k) => `<g class="m" tabindex="0" role="button" data-k="${k}" aria-label="Memory: ${esc(C.memories[k].title)}"><circle cx="${pts[pi][0]}" cy="${pts[pi][1]}" r="17"/><circle cx="${pts[pi][0]}" cy="${pts[pi][1]}" r="6"/></g>`).join('');
+            const mem = idx.map((pi, k) => `<g class="m" tabindex="0" role="button" data-k="${k}" aria-label="Memory: ${esc(C.memories[k].title)}"><circle class="hit" cx="${pts[pi][0]}" cy="${pts[pi][1]}" r="44"/><circle class="gl" cx="${pts[pi][0]}" cy="${pts[pi][1]}" r="18"/><circle class="core" cx="${pts[pi][0]}" cy="${pts[pi][1]}" r="6"/></g>`).join('');
             return `<svg id="uni" viewBox="0 0 600 600"><polyline points="${line}" fill="none" stroke="#e8c987" stroke-opacity=".4" stroke-width="1.2" stroke-dasharray="4 5"/>${dim}${mem}</svg>`
         }
 
@@ -982,7 +1163,7 @@
 
         /* ---- background: stars, fireflies, petals ---- */
         const bg = $('#bg'), bx = bg.getContext('2d'); let W, H, P = [];
-        function size() { W = bg.width = innerWidth; H = bg.height = innerHeight; P = Array.from({ length: MOB ? 55 : 110 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .3, a: Math.random() * 6, k: Math.random() < .18 ? 'f' : Math.random() < .08 ? 'p' : 's' })) }
+        let lastW = 0; function size() { const w = innerWidth; if (w === lastW && (MOB || innerHeight <= H)) return; lastW = w; const dpr = Math.min(devicePixelRatio || 1, 2); W = w; H = Math.round(innerHeight * (MOB ? 1.15 : 1)); bg.width = W * dpr; bg.height = H * dpr; bg.style.width = W + 'px'; bg.style.height = H + 'px'; bx.setTransform(dpr, 0, 0, dpr, 0, 0); P = Array.from({ length: MOB ? 55 : 110 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .3, a: Math.random() * 6, k: Math.random() < .18 ? 'f' : Math.random() < .08 ? 'p' : 's' })) }
         size(); addEventListener('resize', size); let sy = 0; addEventListener('scroll', () => sy = scrollY, { passive: true });
         function loop(t) {
             bx.clearRect(0, 0, W, H); for (const p of P) {
@@ -1000,25 +1181,29 @@
 
         /* ---- reveal + sequences ---- */
         const once = new WeakSet();
+        const ran = {};
         const io = new IntersectionObserver(es => es.forEach(e => {
             if (!e.isIntersecting) return; e.target.classList.add('in');
-            if (e.target.id === 'story') runStory(); if (e.target.id === 'tired') runTired(); if (e.target.id === 'final') runFinal()
-        }), { threshold: .35 });
-        function watch() { $$('.rv').forEach(x => io.observe(x));['story', 'tired', 'final'].forEach(i => io.observe($('#' + i))) }
+            const id = e.target.id, fn = { story: runStory, tired: runTired, final: runFinal }[id]; if (fn && !ran[id]) { ran[id] = 1; fn() }
+        }), { threshold: .3 });
+        function watch() { Object.keys(ran).forEach(k => delete ran[k]);[...$$('.rv'), ...['story', 'tired', 'final'].map(i => $('#' + i))].forEach(x => { io.unobserve(x); io.observe(x) }) }
         let seq = 0;
         async function runStory() {
-            const id = ++seq, L = $('#lines'); L.innerHTML = '';
+            const L = $('#lines'); L.innerHTML = ''; $('#sign').style.opacity = 0;
             const all = [...C.message.lines.map(t => [t, '']), [C.message.big, 'big']];
-            for (const [t, c] of all) {
-                const p = document.createElement('p'); p.className = c; L.append(p); p.classList.add('on');
-                for (const ch of t) { p.textContent += ch; if (!RM) await sleep(c === 'big' ? 32 : 26) } await sleep(RM ? 0 : 450)
+            const H = t => '<span style="visibility:hidden">' + esc(t) + '</span>';
+            const ps = all.map(([t, c]) => { const p = document.createElement('p'); p.className = (c + ' on').trim(); p.innerHTML = H(t); L.append(p); return p });
+            for (let k = 0; k < all.length; k++) {
+                const t = all[k][0], big = all[k][1] === 'big';
+                for (let i = 1; i <= t.length; i++) { ps[k].innerHTML = esc(t.slice(0, i)) + H(t.slice(i)); if (!RM) await sleep(big ? 32 : 26) }
+                await sleep(RM ? 0 : 450)
             }
             $('#sign').style.opacity = 1; floatHearts(MOB ? 14 : 30)
         }
         async function runTired() {
-            const T = $('#tl'); T.innerHTML = ''; const add = (t, c) => { const p = document.createElement('p'); p.textContent = t; if (c) p.className = c; T.append(p); requestAnimationFrame(() => p.classList.add('on')); return sleep(RM ? 0 : 1700) };
-            for (const [a, b] of C.tired) { await add(a); await add(b, 'a'); }
-            await add(C.tiredEnd[0]); await add(C.tiredEnd[1], 'glow'); await add(C.tiredEnd[2], 'a')
+            const T = $('#tl'); T.innerHTML = ''; const q = []; C.tired.forEach(([a, b]) => q.push([a, ''], [b, 'a'])); q.push([C.tiredEnd[0], ''], [C.tiredEnd[1], 'glow'], [C.tiredEnd[2], 'a']);
+            const ps = q.map(([t, c]) => { const p = document.createElement('p'); p.textContent = t; if (c) p.className = c; T.append(p); return p });
+            for (const p of ps) { requestAnimationFrame(() => p.classList.add('on')); await sleep(RM ? 0 : 1700) }
         }
         async function runFinal() {
             const f = i => $('#f' + i); $$('#final .t').forEach(x => x.classList.remove('on'));
@@ -1054,7 +1239,7 @@
         let hT = 0; function hloop(t) {
             hx.clearRect(0, 0, hc.width, hc.height); const d = devicePixelRatio, cx = hc.width / 2, cy = hc.height / 2;
             if (!HP.length) { const b = 1 + .06 * Math.sin(t / 450) + beat; drawHeart(cx, cy, 5.2 * d * b, .9) }
-            else { for (const p of HP) { p.x += (p.tx - p.x) * p.e; p.y += (p.ty - p.y) * p.e; hx.fillStyle = p.c; hx.shadowColor = p.c; hx.shadowBlur = 6 * d; hx.fillRect(p.x, p.y, p.z, p.z) } }
+            else { for (const p of HP) { p.x += (p.tx - p.x) * p.e; p.y += (p.ty - p.y) * p.e; hx.fillStyle = p.c; hx.fillRect(p.x, p.y, p.z, p.z) } }
             beat *= .9; requestAnimationFrame(hloop)
         }
         hsize(); addEventListener('resize', hsize); requestAnimationFrame(hloop);
@@ -1074,27 +1259,29 @@
         }
 
         /* ---- letter ---- */
-        $('#open').onclick = () => { $('#env').classList.add('open'); $('#open').style.display = 'none'; setTimeout(() => { $('#letter').classList.add('show'); $('#letter').scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' }) }, 900) };
+        $('#open').onclick = () => { $('#env').classList.add('open'); $('#open').style.display = 'none'; setTimeout(() => { $('#letter').classList.add('show'); $('#letter').scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' }) }, 900) };
 
-        /* ---- music (generated soft pad, no autoplay) ---- */
-        let ac, on = false, pad;
-        function startMusic() {
-            ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const g = ac.createGain(); g.gain.value = 0; g.gain.linearRampToValueAtTime(.07, ac.currentTime + 3); g.connect(ac.destination);
-            const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 900; f.connect(g); const os = [];
-            [[220, 261.63, 329.63], [174.61, 220, 261.63], [196, 246.94, 293.66], [220, 261.63, 329.63]].flat();
-            const ch = [[220, 261.63, 329.63, 440], [174.61, 220, 261.63, 349.23], [196, 246.94, 293.66, 392], [164.81, 207.65, 246.94, 329.63]];
-            const voices = [0, 1, 2, 3].map(i => { const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = ch[0][i]; const l = ac.createOscillator(), lg = ac.createGain(); l.frequency.value = .15 + i * .03; lg.gain.value = 1.5; l.connect(lg); lg.connect(o.detune); o.connect(f); o.start(); l.start(); return o });
-            let k = 0; const iv = setInterval(() => { k = (k + 1) % 4; voices.forEach((o, i) => o.frequency.setTargetAtTime(ch[k][i], ac.currentTime, 1.2)) }, 6000);
-            pad = { g, voices, iv }
+        /* ---- music: local file countonme.mp3 ---- */
+        const audio = new Audio('countonme.mp3');
+        audio.loop = true; audio.preload = 'auto'; audio.volume = 0;
+        let fadeT;
+        function fadeTo(v, ms = 1500, done) {
+            clearInterval(fadeT); const s = audio.volume, t0 = performance.now();
+            fadeT = setInterval(() => { const p = Math.min((performance.now() - t0) / ms, 1); audio.volume = Math.max(0, Math.min(1, s + (v - s) * p)); if (p >= 1) { clearInterval(fadeT); done && done() } }, 50)
         }
-        function stopMusic() { pad.g.gain.setTargetAtTime(0, ac.currentTime, .4); clearInterval(pad.iv); const v = pad.voices; setTimeout(() => v.forEach(o => o.stop()), 1500) }
-        $('#music').onclick = () => { on = !on; on ? startMusic() : stopMusic(); $('#music').classList.toggle('on', on); $('#music').setAttribute('aria-pressed', on) };
+        function setMusicUI() { const o = !audio.paused; $('#music').classList.toggle('on', o); $('#music').setAttribute('aria-pressed', o) }
+        async function playMusic() { try { await audio.play(); fadeTo(.6); setMusicUI() } catch (e) { console.warn('Audio blocked or file missing:', e) } }
+        function pauseMusic() { fadeTo(0, 800, () => { audio.pause(); setMusicUI() }) }
+        $('#music').onclick = () => audio.paused ? playMusic() : pauseMusic();
+        /* pause when the phone locks / tab is hidden */
+        let wasOn = false;
+        document.addEventListener('visibilitychange', () => { if (document.hidden) { wasOn = !audio.paused; audio.pause(); setMusicUI() } else if (wasOn) playMusic() });
 
         /* ---- intro + enter ---- */
         const ic = $('#ic'), ix = ic.getContext('2d');
         function intro() {
             return new Promise(res => {
-                ic.width = innerWidth; ic.height = innerHeight; const w = ic.width, h = ic.height, s = Math.min(w, h) / 38; const tr = []; let t0 = performance.now(), dur = RM ? 400 : 4200;
+                const dpr = Math.min(devicePixelRatio || 1, 2); ic.width = innerWidth * dpr; ic.height = innerHeight * dpr; ix.setTransform(dpr, 0, 0, dpr, 0, 0); const w = innerWidth, h = innerHeight, s = Math.min(w, h) / 38; const tr = []; let t0 = performance.now(), dur = RM ? 400 : 4200;
                 const hp = a => [w / 2 + 16 * Math.pow(Math.sin(a), 3) * s, h / 2 - (13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a)) * s];
                 (function f(n) {
                     const p = Math.min((n - t0) / dur, 1); ix.fillStyle = 'rgba(3,6,26,.2)'; ix.fillRect(0, 0, w, h);
@@ -1108,7 +1295,8 @@
             })
         }
         async function begin() { document.body.classList.add('lock'); $('#intro').style.display = 'grid'; $('#intro').style.opacity = 1; ix.clearRect(0, 0, ic.width, ic.height); await intro(); $('#intro').style.opacity = 0; await sleep(1500); $('#intro').style.display = 'none'; document.body.classList.remove('lock'); scrollTo(0, 0); $$('.rv').forEach(x => x.classList.remove('in')); watch() }
-        $('#enter').onclick = async () => { // fly through stars
+        $('#enter').onclick = async () => {
+            if (audio.paused) playMusic();
             const t = $('#story'); const o = document.createElement('div'); o.style.cssText = 'position:fixed;inset:0;z-index:95;background:radial-gradient(circle,#fff 0,#c8b8f0 8%,#0a1030 60%);opacity:0;transition:opacity 1s,transform 1.4s;transform:scale(.4)'; document.body.append(o);
             requestAnimationFrame(() => { o.style.opacity = 1; o.style.transform = 'scale(2.4)' }); await sleep(1000); t.scrollIntoView(); o.style.opacity = 0; await sleep(1100); o.remove()
         };
